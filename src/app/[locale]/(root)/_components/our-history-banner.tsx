@@ -1,6 +1,5 @@
 "use client";
 import Image from "next/image";
-import { CarouselTypeTwo } from "./carousel-type-two";
 
 export const OurHistoryBanner = () => {
   return (
