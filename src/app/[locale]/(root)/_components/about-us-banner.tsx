@@ -6,7 +6,7 @@ export const AboutUsBanner = () => {
   return (
     <div className="relative w-full">
       <Image
-        src="/img/wallpaper/recycle-storyset.svg"
+        src="/img/wallpaper/image.png"
         alt="Banner Sobre Nós - Serratec Verde"
         fill
         className="object-cover absolute max-h-[21rem]"

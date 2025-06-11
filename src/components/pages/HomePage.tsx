@@ -6,6 +6,10 @@ import { OurValuesBanner } from "@/app/[locale]/(root)/_components/our-values-ba
 import { TestimonialsBanner } from "@/app/[locale]/(root)/_components/testimonials-banner";
 import { Separator } from "@/components/ui/separator";
 import { DiverseFunctionalitesBanner } from "@/app/[locale]/(root)/_components/diverse-functionalities-banner";
+import {
+  ConsciousDisposalBatteriesBanner,
+  ConsciousDisposalElectronicsBanner,
+} from "@/app/[locale]/(root)/_components/conscious-disposal-banners";
 
 export const HomePage = () => {
   return (
@@ -17,9 +21,13 @@ export const HomePage = () => {
         <Separator className="bg-primary" />
         <OurMissionBanner />
         <Separator className="bg-primary" />
+        <ConsciousDisposalBatteriesBanner />
+        <Separator className="bg-primary" />
         <OurValuesBanner />
         <Separator className="bg-primary" />
         <OurTeamBanner />
+        <Separator className="bg-primary" />
+        <ConsciousDisposalElectronicsBanner />
         <Separator className="bg-primary" />
         <DiverseFunctionalitesBanner />
         <Separator className="bg-primary" />
