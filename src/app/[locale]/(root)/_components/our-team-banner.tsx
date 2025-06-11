@@ -16,39 +16,39 @@ interface TeamMember {
 const teamMembers: TeamMember[] = [
   {
     id: 1,
-    name: "Carlos Silva",
-    role: "CEO & Fundador",
-    bio: "Empreendedor com mais de 10 anos de experiência em tecnologia e gestão de academias. Visionário por trás da NonoDan.",
-    imageSrc: "/img/wallpaper/1.jpeg",
-    linkedin: "https://linkedin.com/in/carlossilva",
-    email: "carlos@nonodan.com",
+    name: "Fernanda Lima",
+    role: "Coordenadora de Sustentabilidade",
+    bio: "Apaixonada por meio ambiente, lidera as ações de coleta seletiva e engajamento no polo Serratec.",
+    imageSrc: "https://randomuser.me/api/portraits/women/44.jpg",
+    linkedin: "#",
+    email: "fernanda@serratecverde.com",
   },
   {
     id: 2,
-    name: "Ana Rodrigues",
-    role: "CTO",
-    bio: "Especialista em desenvolvimento de software com foco em experiência do usuário e soluções para o mercado fitness.",
-    imageSrc: "/img/wallpaper/2.jpeg",
-    linkedin: "https://linkedin.com/in/anarodrigues",
-    email: "ana@nonodan.com",
+    name: "Lucas Martins",
+    role: "Analista de Projetos",
+    bio: "Responsável pelo acompanhamento dos resultados e transparência das pesagens.",
+    imageSrc: "https://randomuser.me/api/portraits/men/32.jpg",
+    linkedin: "#",
+    email: "lucas@serratecverde.com",
   },
   {
     id: 3,
-    name: "Rafael Souza",
-    role: "Diretor de Produto",
-    bio: "Apaixonado por inovação, lidera o desenvolvimento de novos recursos para melhorar a experiência dos usuários.",
-    imageSrc: "/img/wallpaper/3.jpeg",
-    linkedin: "https://linkedin.com/in/rafaelsouza",
-    email: "rafael@nonodan.com",
+    name: "Patrícia Souza",
+    role: "Comunicação e Engajamento",
+    bio: "Fomenta a participação das empresas e equipes, promovendo campanhas educativas.",
+    imageSrc: "https://randomuser.me/api/portraits/women/65.jpg",
+    linkedin: "#",
+    email: "patricia@serratecverde.com",
   },
   {
     id: 4,
-    name: "Juliana Costa",
-    role: "Gerente de Sucesso do Cliente",
-    bio: "Dedicada a garantir que nossos clientes aproveitem ao máximo todas as funcionalidades da plataforma.",
-    imageSrc: "/img/wallpaper/4.jpeg",
-    linkedin: "https://linkedin.com/in/julianacosta",
-    email: "juliana@nonodan.com",
+    name: "João Pedro Alves",
+    role: "Apoio Operacional",
+    bio: "Auxilia na logística das coletas e no suporte às equipes participantes.",
+    imageSrc: "https://randomuser.me/api/portraits/men/41.jpg",
+    linkedin: "#",
+    email: "joao@serratecverde.com",
   },
 ];
 
@@ -57,8 +57,9 @@ export const OurTeamBanner = () => {
     <div className="flex flex-col gap-8 w-full">
       <div className="flex flex-col items-center text-center gap-2">
         <h3 className="heading-03-bold text-foreground">Nossa Equipe</h3>
-        <p className="body-paragraph text-foreground/80 max-w-[50rem]">
-          Conheça os talentosos profissionais por trás de toda a ação, dedicados a revolucionar o mundo.
+        <p className="body-title-light text-foreground/80 max-w-[50rem]">
+          Conheça os responsáveis por tornar o Serratec Verde realidade, promovendo sustentabilidade e engajamento no
+          polo.
         </p>
       </div>
 

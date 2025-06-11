@@ -6,7 +6,7 @@ export const OurValuesBanner = () => {
     <div className="flex flex-col gap-8 w-full">
       <div className="flex flex-col items-center text-center gap-2">
         <h3 className="heading-03-bold text-foreground">Destaques da Coleta Seletiva</h3>
-        <p className="body-paragraph text-foreground/80 max-w-[50rem]">
+        <p className="body-title-light text-foreground/80 max-w-[50rem]">
           A coleta seletiva no polo Serratec é uma ação conjunta para promover sustentabilidade, engajamento e
           responsabilidade ambiental entre todas as empresas e colaboradores.
         </p>

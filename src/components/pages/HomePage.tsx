@@ -22,9 +22,9 @@ export const HomePage = () => {
         <OurTeamBanner />
         <Separator className="bg-primary" />
         <DiverseFunctionalitesBanner />
+        <Separator className="bg-primary" />
+        <TestimonialsBanner />
       </div>
-      <Separator className="bg-primary" />
-      <TestimonialsBanner />
       <Separator className="bg-primary" />
     </div>
   );

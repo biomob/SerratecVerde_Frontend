@@ -20,7 +20,7 @@ const testimonials: Testimonial[] = [
     company: "T2M (Equipe Azul)",
     content:
       "Participar da coleta seletiva no polo Serratec me fez repensar meus hábitos. É gratificante ver o quanto conseguimos reciclar juntos e ainda ajudar minha equipe na gincana!",
-    imageSrc: "/img/wallpaper/5.jpeg",
+    imageSrc: "https://randomuser.me/api/portraits/women/65.jpg",
   },
   {
     id: 2,
@@ -29,7 +29,7 @@ const testimonials: Testimonial[] = [
     company: "Empresa Parceira Serratec",
     content:
       "A mobilização das empresas e colaboradores é inspiradora. O projeto Serratec Verde mostra que pequenas atitudes coletivas geram grandes resultados para o meio ambiente.",
-    imageSrc: "/img/wallpaper/6.jpeg",
+    imageSrc: "https://randomuser.me/api/portraits/men/43.jpg",
   },
   {
     id: 3,
@@ -38,7 +38,7 @@ const testimonials: Testimonial[] = [
     company: "T2M",
     content:
       "A gincana trouxe um clima de união e competição saudável. Cada entrega de material reciclável é uma vitória para nossa equipe e para o planeta!",
-    imageSrc: "/img/wallpaper/7.jpeg",
+    imageSrc: "https://randomuser.me/api/portraits/women/32.jpg",
   },
   {
     id: 4,
@@ -47,7 +47,7 @@ const testimonials: Testimonial[] = [
     company: "BIOMOB",
     content:
       "É muito bom ver o engajamento de todos. O registro transparente das pesagens motiva as empresas a participarem cada vez mais!",
-    imageSrc: "/img/wallpaper/8.jpeg",
+    imageSrc: "https://randomuser.me/api/portraits/men/22.jpg",
   },
 ];
 
@@ -78,11 +78,11 @@ export const TestimonialsBanner = () => {
   };
 
   return (
-    <div className="w-full bg-card/30 backdrop-blur-sm py-16">
+    <div className="w-full bg-card/30 backdrop-blur-sm ">
       <div className="max-w-[76.8125rem] w-full mx-auto max-xl:max-w-[90vw] flex flex-col items-center gap-12">
         <div className="flex flex-col items-center text-center gap-2">
           <h3 className="heading-03-bold text-foreground">O que dizem nossos participantes</h3>
-          <p className="body-paragraph text-foreground/80 max-w-[50rem]">
+          <p className="body-title-light text-foreground/80 max-w-[50rem]">
             Veja como a coleta seletiva e a gincana T2M estão transformando o polo Serratec e inspirando atitudes mais
             sustentáveis no dia a dia das empresas e colaboradores.
           </p>
