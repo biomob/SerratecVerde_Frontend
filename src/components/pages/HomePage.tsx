@@ -25,6 +25,8 @@ import {
 } from "@/app/[locale]/(root)/_components/conscious-disposal-banners-skeleton";
 import { T2MGincanaPlacarBanner } from "@/app/[locale]/(root)/_components/t2m-gincana-placar-banner";
 import { T2MGincanaPlacarBannerSkeleton } from "@/app/[locale]/(root)/_components/t2m-gincana-placar-banner-skeleton";
+import { ParticipatingCompaniesBanner } from "@/app/[locale]/(root)/_components/participating-companies-banner";
+import { ParticipatingCompaniesBannerSkeleton } from "@/app/[locale]/(root)/_components/participating-companies-banner-skeleton";
 
 export const HomePage = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -44,6 +46,8 @@ export const HomePage = () => {
         {isMounted ? <OurMissionBanner /> : <OurMissionBannerSkeleton />}
         <Separator className="bg-primary" />
         {isMounted ? <OurValuesBanner /> : <OurValuesBannerSkeleton />}
+        <Separator className="bg-primary" />
+        {isMounted ? <ParticipatingCompaniesBanner /> : <ParticipatingCompaniesBannerSkeleton />}
         <Separator className="bg-primary" />
         {isMounted ? <ConsciousDisposalBatteriesBanner /> : <ConsciousDisposalBatteriesBannerSkeleton />}
         <Separator className="bg-primary" />

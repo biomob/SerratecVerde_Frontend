@@ -3,6 +3,8 @@ import { TrendingUp } from "lucide-react";
 import { Bar, BarChart, CartesianGrid, LabelList, XAxis } from "recharts";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
+import Link from "next/link";
+import { buttonVariants } from "@/components/ui/button";
 
 const teams = [
   {
@@ -61,14 +63,14 @@ const teams = [
 
 export function T2MGincanaPlacarBanner() {
   return (
-    <div className="flex flex-col gap-8 w-full">
+    <div className="flex flex-col items-center gap-8 w-full">
       <div className="flex flex-col items-center text-center gap-2">
         <h3 className="heading-03-bold text-foreground">Gincana T2M: Placar Atual por Equipe</h3>
         <p className="body-title-light text-foreground/80 max-w-[50rem]">
           Veja o desempenho de cada equipe na arrecadação de alimentos.
         </p>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2  gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2  gap-6 w-full">
         {teams.map((team) => (
           <Card key={team.name} className="w-full h-auto flex flex-col">
             <CardHeader>
@@ -155,6 +157,14 @@ export function T2MGincanaPlacarBanner() {
           </Card>
         ))}
       </div>
+
+      <Link
+        className={buttonVariants({ variant: "link" })}
+        target="_blank"
+        href={`${process.env.NEXT_PUBLIC_DASHBOARD_URL!}/pt/equipes/1`}
+      >
+        Mais informações sobre a Gincana T2M
+      </Link>
     </div>
   );
 }
