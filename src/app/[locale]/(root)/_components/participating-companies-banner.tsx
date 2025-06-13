@@ -163,9 +163,9 @@ export function ParticipatingCompaniesBanner() {
   );
 
   return (
-    <div className="flex flex-col justify-center items-center gap-4 w-full">
+    <div className="flex flex-col justify-center items-center gap-4 w-full overflow-hidden">
       <div className="grid grid-cols-1 md:grid-cols-12 gap-8 w-full items-center">
-        <div className="col-span-12 md:col-span-8 flex flex-col gap-3 w-full">
+        <div className="col-span-1 md:col-span-6 lg:col-span-8 flex flex-col gap-3 w-full">
           <div className="flex flex-col">
             <span className="heading-03-bold">Empresas que mais coletaram</span>
             <span className="body-title-light w-full">
@@ -174,8 +174,8 @@ export function ParticipatingCompaniesBanner() {
           </div>
           {sortedCompanies.map((company, index) => (
             <div className="flex flex-col gap-2" key={company.id_empresa}>
-              <div className="flex gap-4 justify-between items-center">
-                <div className="flex gap-4">
+              <div className="flex gap-4 justify-between items-end sm:items-center">
+                <div className="flex flex-col sm:flex-row gap-4">
                   <Image
                     src={companyImages[company.nome_empresa] || "/img/mocked/default.png"}
                     alt={company.nome_empresa}
@@ -204,7 +204,7 @@ export function ParticipatingCompaniesBanner() {
             </div>
           ))}
         </div>
-        <div className="col-span-12 md:col-span-4 flex items-center justify-center min-h-[350px]">
+        <div className="col-span-1 md:col-span-6 lg:col-span-4 flex items-center justify-center min-h-[350px]">
           <ParticipatingCompaniesPieChart />
         </div>
       </div>
