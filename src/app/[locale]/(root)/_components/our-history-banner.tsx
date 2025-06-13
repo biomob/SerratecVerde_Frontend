@@ -1,10 +1,19 @@
 "use client";
+import { useTheme } from "next-themes";
 import Image from "next/image";
 
 export const OurHistoryBanner = () => {
+  const { theme } = useTheme();
   return (
     <div className="flex flex-col gap-8 w-full">
       <div className="flex flex-col items-center text-center gap-2">
+        <Image
+          src={theme == "light" ? "/img/serrateclight.png" : "/img/serratecdark.png"}
+          alt="Ilustração coleta seletiva Serratec Verde"
+          width={196}
+          height={425}
+          className="w-[196px] h-auto "
+        />
         <h3 className="heading-03-bold text-foreground">Destaques da Coleta Seletiva: Por que participar?</h3>
         <p className="body-title-light text-foreground/80 max-w-[50rem]">
           A coleta seletiva no polo Serratec é uma ação conjunta para promover sustentabilidade, engajamento e

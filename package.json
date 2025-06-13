@@ -38,6 +38,7 @@
     "react-flagkit": "^2.0.4",
     "react-icons": "^5.2.1",
     "react-speech-kit": "^3.0.1",
+    "recharts": "^2.15.3",
     "sonner": "^1.7.1",
     "tailwind-merge": "^2.3.0",
     "tailwind-scrollbar-hide": "^1.1.7",
