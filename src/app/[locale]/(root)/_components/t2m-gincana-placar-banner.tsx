@@ -1,12 +1,14 @@
 "use client";
 import { TrendingUp } from "lucide-react";
-import { Bar, BarChart, CartesianGrid, LabelList, XAxis } from "recharts";
+import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
+import { CompanyReportResponse } from "@/@types/reports";
+import { DepositByCompanyIdItem } from "@/@types/deposits";
 
-const teams = [
+const teamsMock = [
   {
     name: "Vermelho",
     color: "#d32f2f",
@@ -61,7 +63,45 @@ const teams = [
   },
 ];
 
-export function T2MGincanaPlacarBanner() {
+export function T2MGincanaPlacarBanner({ deposits }: { deposits?: DepositByCompanyIdItem[] | null }) {
+  // Se houver dados, monta os times a partir dos depósitos
+  let teams = teamsMock;
+  if (deposits && deposits.length > 0) {
+    // Agrupa por equipe
+    const equipesMap = new Map<
+      string,
+      { name: string; color: string; wastes: Record<string, number>; total: number }
+    >();
+    deposits.forEach((dep) => {
+      const equipeNome = dep.nome_equipe;
+      // Cor padrão por nome (pode ser customizada)
+      const corPadrao = equipeNome.toLowerCase().includes("verde")
+        ? "#00ff40"
+        : equipeNome.toLowerCase().includes("azul")
+          ? "#004cff"
+          : equipeNome.toLowerCase().includes("vermelh")
+            ? "#ff0000"
+            : equipeNome.toLowerCase().includes("rosa")
+              ? "#ff00d0"
+              : "#388e3c";
+      if (!equipesMap.has(equipeNome)) {
+        equipesMap.set(equipeNome, { name: equipeNome, color: corPadrao, wastes: {}, total: 0 });
+      }
+      const equipe = equipesMap.get(equipeNome)!;
+      equipe.wastes[dep.nome_tipo] = (equipe.wastes[dep.nome_tipo] || 0) + Number(dep.quantidade);
+      equipe.total += Number(dep.quantidade);
+    });
+    teams = Array.from(equipesMap.values()).map((e) => ({
+      name: e.name,
+      color: e.color,
+      total: e.total,
+      wastes: Object.entries(e.wastes).map(([nome_tipo, total_quantidade_coletada]) => ({
+        nome_tipo,
+        total_quantidade_coletada,
+      })),
+    }));
+  }
+
   return (
     <div className="flex flex-col items-center gap-8 w-full">
       <div className="flex flex-col items-center text-center gap-2">
@@ -75,7 +115,7 @@ export function T2MGincanaPlacarBanner() {
           <Card key={team.name} className="w-full h-auto flex flex-col">
             <CardHeader>
               <div className="flex flex-col heading-04-medium" style={{ color: team.color }}>
-                {team.name}
+                Equipe {team.name}
                 <span className="body-paragraph text-muted-foreground">
                   Total arrecadado:{" "}
                   {team.total.toLocaleString("pt-BR", {
@@ -103,11 +143,9 @@ export function T2MGincanaPlacarBanner() {
                 >
                   <CartesianGrid vertical={false} />
                   <XAxis
-                    dataKey="nome_tipo"
-                    tickLine={false}
-                    tickMargin={10}
+                    dataKey={undefined} // Remove o nome do item abaixo da barra
+                    tick={false} // Remove os ticks
                     axisLine={false}
-                    tickFormatter={(value) => value}
                   />
                   <ChartTooltip
                     cursor={false}
@@ -130,16 +168,7 @@ export function T2MGincanaPlacarBanner() {
                       return null;
                     }}
                   />
-                  <Bar dataKey="total_quantidade_coletada" fill={team.color} radius={8}>
-                    <LabelList
-                      dataKey="total_quantidade_coletada"
-                      position="top"
-                      offset={12}
-                      className="fill-foreground"
-                      fontSize={12}
-                      formatter={(value: number) => `${value} kg`}
-                    />
-                  </Bar>
+                  <Bar dataKey="total_quantidade_coletada" fill={team.color} radius={8} />
                 </BarChart>
               </ChartContainer>
             </CardContent>
@@ -161,7 +190,7 @@ export function T2MGincanaPlacarBanner() {
       <Link
         className={buttonVariants({ variant: "link" })}
         target="_blank"
-        href={`${process.env.NEXT_PUBLIC_DASHBOARD_URL!}/pt/equipes/1`}
+        href={`${process.env.NEXT_PUBLIC_DASHBOARD_URL!}/pt/equipes/17`}
       >
         Mais informações sobre a Gincana T2M
       </Link>

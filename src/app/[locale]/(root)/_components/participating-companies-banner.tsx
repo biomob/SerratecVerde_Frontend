@@ -7,6 +7,7 @@ import { TrendingUp } from "lucide-react";
 import { Pie, PieChart } from "recharts";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
+import { CompanyType } from "@/@types/companies";
 
 const companyImages: { [key: string]: string } = {
   Biomob: "/img/mocked/biomob.png",
@@ -29,6 +30,8 @@ const mockedCompanies = [
     data_atualizacao: "2025-06-11T20:00:20.262Z",
     total_equipes: "10",
     total_depositos: "1200.00",
+    logo: "/img/mocked/biomob.png",
+    logo_dark: "/img/mocked/biomob.png",
   },
   {
     id_empresa: 2,
@@ -42,6 +45,8 @@ const mockedCompanies = [
     data_atualizacao: "2025-06-11T20:00:20.262Z",
     total_equipes: "17",
     total_depositos: "370.45",
+    logo: "/img/mocked/orange.png",
+    logo_dark: "/img/mocked/orange.png",
   },
   {
     id_empresa: 3,
@@ -55,6 +60,8 @@ const mockedCompanies = [
     data_atualizacao: "2025-06-11T20:00:20.262Z",
     total_equipes: "5",
     total_depositos: "594.16",
+    logo: "/img/mocked/t2m.png",
+    logo_dark: "/img/mocked/t2m.png",
   },
   {
     id_empresa: 4,
@@ -68,6 +75,8 @@ const mockedCompanies = [
     data_atualizacao: "2025-06-11T20:00:20.262Z",
     total_equipes: "8",
     total_depositos: "850.50",
+    logo: "/img/mocked/btb.png",
+    logo_dark: "/img/mocked/btb.png",
   },
   {
     id_empresa: 5,
@@ -81,10 +90,12 @@ const mockedCompanies = [
     data_atualizacao: "2025-06-11T20:00:20.262Z",
     total_equipes: "20",
     total_depositos: "1500.25",
+    logo: "/img/mocked/serratec.png",
+    logo_dark: "/img/mocked/serratec.png",
   },
 ];
 
-export function ParticipatingCompaniesPieChart() {
+export function ParticipatingCompaniesPieChart({ companies }: { companies?: CompanyType[] }) {
   const pieColors = [
     "#15803d", // verde escuro
     "#22c55e", // verde médio
@@ -93,20 +104,22 @@ export function ParticipatingCompaniesPieChart() {
     "#a7f3d0", // verde pastel 2
   ];
 
-  const chartData = mockedCompanies.map((company, i) => ({
+  const companyList = companies && companies.length > 0 ? companies : mockedCompanies;
+
+  const chartData = companyList.map((company, i) => ({
     browser: company.nome_empresa,
     visitors: parseFloat(company.total_depositos),
     fill: pieColors[i % pieColors.length],
   }));
 
   const chartConfig: ChartConfig = Object.fromEntries(
-    mockedCompanies.map((company, i) => [
+    companyList.map((company, i) => [
       company.nome_empresa,
       { label: company.nome_empresa, color: pieColors[i % pieColors.length] },
     ])
   );
 
-  const totalKg = mockedCompanies.reduce((acc, company) => acc + parseFloat(company.total_depositos), 0);
+  const totalKg = companyList.reduce((acc, company) => acc + parseFloat(company.total_depositos), 0);
 
   return (
     <Card className="flex flex-col">
@@ -157,8 +170,9 @@ export function ParticipatingCompaniesPieChart() {
   );
 }
 
-export function ParticipatingCompaniesBanner() {
-  const sortedCompanies = [...mockedCompanies].sort(
+export function ParticipatingCompaniesBanner({ companies }: { companies?: CompanyType[] }) {
+  const companyList = companies && companies.length > 0 ? companies : mockedCompanies;
+  const sortedCompanies = [...companyList].sort(
     (a, b) => parseFloat(b.total_depositos) - parseFloat(a.total_depositos)
   );
 
@@ -167,9 +181,9 @@ export function ParticipatingCompaniesBanner() {
       <div className="grid grid-cols-1 md:grid-cols-12 gap-8 w-full items-center">
         <div className="col-span-1 md:col-span-6 lg:col-span-8 flex flex-col gap-3 w-full">
           <div className="flex flex-col">
-            <span className="heading-03-bold">Empresas que mais coletaram</span>
+            <span className="heading-03-bold">Empresas participantes do projeto</span>
             <span className="body-title-light w-full">
-              Confira quem está no top atualmente: As empresas que mais coletaram até o momento.
+              Confira quem está contribuindo para a coleta de resíduos no polo Serratec
             </span>
           </div>
           {sortedCompanies.map((company, index) => (
@@ -205,7 +219,7 @@ export function ParticipatingCompaniesBanner() {
           ))}
         </div>
         <div className="col-span-1 md:col-span-6 lg:col-span-4 flex items-center justify-center min-h-[350px]">
-          <ParticipatingCompaniesPieChart />
+          <ParticipatingCompaniesPieChart companies={companyList} />
         </div>
       </div>
       <Link

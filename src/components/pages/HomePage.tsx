@@ -27,11 +27,38 @@ import { T2MGincanaPlacarBanner } from "@/app/[locale]/(root)/_components/t2m-gi
 import { T2MGincanaPlacarBannerSkeleton } from "@/app/[locale]/(root)/_components/t2m-gincana-placar-banner-skeleton";
 import { ParticipatingCompaniesBanner } from "@/app/[locale]/(root)/_components/participating-companies-banner";
 import { ParticipatingCompaniesBannerSkeleton } from "@/app/[locale]/(root)/_components/participating-companies-banner-skeleton";
+import { allCompaniesAction } from "@/app/actions/companies";
+import { depositByCompanyIdAction } from "@/app/actions/deposits";
+import { CompanyType } from "@/@types/companies";
+import { DepositsByCompanyIdResponse } from "@/@types/deposits";
 
 export const HomePage = () => {
   const [isMounted, setIsMounted] = useState(false);
+  const [companies, setCompanies] = useState<CompanyType[]>([]);
+  const [loadingCompanies, setLoadingCompanies] = useState(true);
+  const [t2mDeposits, setT2mDeposits] = useState<DepositsByCompanyIdResponse["data"] | null>(null);
+  const [loadingT2m, setLoadingT2m] = useState(true);
+
   useEffect(() => {
     setIsMounted(true);
+    async function fetchCompanies() {
+      setLoadingCompanies(true);
+      const result = await allCompaniesAction();
+      if (result.success && result.data?.data) {
+        setCompanies(result.data.data);
+      }
+      setLoadingCompanies(false);
+    }
+    async function fetchT2mDeposits() {
+      setLoadingT2m(true);
+      const result = await depositByCompanyIdAction("17");
+      if (result.success && result.data?.data) {
+        setT2mDeposits(result.data.data); // Corrigido para usar apenas o array de dados
+      }
+      setLoadingT2m(false);
+    }
+    fetchCompanies();
+    fetchT2mDeposits();
   }, []);
 
   return (
@@ -41,13 +68,29 @@ export const HomePage = () => {
         <Separator className="bg-primary" />
         {isMounted ? <OurHistoryBanner /> : <OurHistoryBannerSkeleton />}
         <Separator className="bg-primary" />
-        {isMounted ? <T2MGincanaPlacarBanner /> : <T2MGincanaPlacarBannerSkeleton />}
+        {isMounted ? (
+          loadingT2m ? (
+            <T2MGincanaPlacarBannerSkeleton />
+          ) : (
+            <T2MGincanaPlacarBanner deposits={t2mDeposits} />
+          )
+        ) : (
+          <T2MGincanaPlacarBannerSkeleton />
+        )}
         <Separator className="bg-primary" />
         {isMounted ? <OurMissionBanner /> : <OurMissionBannerSkeleton />}
         <Separator className="bg-primary" />
         {isMounted ? <OurValuesBanner /> : <OurValuesBannerSkeleton />}
         <Separator className="bg-primary" />
-        {isMounted ? <ParticipatingCompaniesBanner /> : <ParticipatingCompaniesBannerSkeleton />}
+        {isMounted ? (
+          loadingCompanies ? (
+            <ParticipatingCompaniesBannerSkeleton />
+          ) : (
+            <ParticipatingCompaniesBanner companies={companies} />
+          )
+        ) : (
+          <ParticipatingCompaniesBannerSkeleton />
+        )}
         <Separator className="bg-primary" />
         {isMounted ? <ConsciousDisposalBatteriesBanner /> : <ConsciousDisposalBatteriesBannerSkeleton />}
         <Separator className="bg-primary" />
